@@ -33,16 +33,17 @@
           </nav>
           <section class="tab-contents">
 
-            <article class="tab-section js-tab-section is-active tab-content-info">
+            <article class="tab-section js-tab-section is-active tab-content-info animate-fade-in">
               <p>Click on the map to begin collecting data</p>
               <p>About this project...</p>
             </article>
 
-            <article class="tab-section js-tab-section tab-content-form">
+            <article class="tab-section js-tab-section tab-content-form animate-fade-in">
 
               <div class="card form card-form">
                 <div class="card-content streetFood">
-                  <fieldset class="radio-group form__vendor--type">
+
+                  <!-- <fieldset class="radio-group form__vendor--type">
                     <legend class="radio-group-title">Vendor Type</legend>
                     <input class="radio-group-input btn-group" type="radio" id="truck" name="vendor" />
                     <label class="radio-group-label btn-group select-full" for="truck"><img class="btn-img img-truck"
@@ -53,7 +54,17 @@
                     <input class="radio-group-input btn-group" type="radio" id="booth" name="vendor" />
                     <label class="radio-group-label btn-group select-full" for="booth"><img class="btn-img img-booth"
                         src="img/food-booth.svg" alt="food booth icon">Food Booth</label>
-                  </fieldset>
+                  </fieldset> -->
+
+                  <label>
+                    <div class="vendor-type">Vendor Type</div>
+                    <select class="select-full form__vendor--type">
+                      <option value="" selected>select</option>
+                      <option value="truck">Food Truck</option>
+                      <option value="cart">Food Cart</option>
+                      <option value="booth">Food Booth</option>
+                    </select>
+                  </label>
 
                   <label>
                     <div class="food-type">Food Type</div>
@@ -83,14 +94,14 @@
                     <label><input type="checkbox">Outdoor Seating</label>
                   </fieldset>
 
-                  <button class="form__btn btn">Map It!</button>
+                  <button class="form__btn btn">Map Location</button>
 
                 </div>
               </div>
             </article>
 
-            <article class="tab-section js-tab-section tab-content-list">
-              <p>Click on the map to create a new street food location list item </p>
+            <article class="tab-section js-tab-section tab-content-list animate-fade-in">
+              <p>Click on the map to add a new street food location list item </p>
 
               <div class="card card-wide">
                 <div class="card-content">
