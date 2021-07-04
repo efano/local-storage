@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Local Storage Example</title>
+</head>
+
+<body>
+  <div id="container">
+    <!-- side navigation -->
+    <div id="side-panel">
+      <div class="panel panel-white panel-no-border">
+        <h3> <span class="logo">🌶️ </span>Street Food Tracker</h3>
+
+        <div class="modifier-class trailer-2 js-tab-group tabs-transparent">
+          <nav class="tab-nav">
+            <a class="tab-title is-active js-tab tab-info">Info</a>
+            <a class="tab-title js-tab tab-disabled tab-form">Form</a>
+            <a class="tab-title js-tab tab-list">List</a>
+          </nav>
+          <section class="tab-contents">
+
+            <article class="tab-section js-tab-section is-active tab-content-info">
+              <p>Click on the map to begin collecting data</p>
+              <p>About this project...</p>
+            </article>
+
+            <article class="tab-section js-tab-section tab-content-form">
+
+              <div class="card form card-form">
+                <div class="card-content streetFood">
+                  <fieldset class="radio-group form__vendor--type">
+                    <legend class="radio-group-title">Vendor Type</legend>
+                    <input class="radio-group-input btn-group" type="radio" id="truck" name="vendor" />
+                    <label class="radio-group-label btn-group select-full" for="truck"><img class="btn-img img-truck"
+                        src="img/food-truck.svg" alt="food truck icon">Food Truck</label>
+                    <input class="radio-group-input btn-group" type="radio" id="cart" name="vendor" />
+                    <label class="radio-group-label btn-group select-full" for="cart"><img class="btn-img img-cart"
+                        src="img/food-cart.svg" alt="food cart icon">Food Cart</label>
+                    <input class="radio-group-input btn-group" type="radio" id="booth" name="vendor" />
+                    <label class="radio-group-label btn-group select-full" for="booth"><img class="btn-img img-booth"
+                        src="img/food-booth.svg" alt="food booth icon">Food Booth</label>
+                  </fieldset>
+
+                  <label>
+                    <div class="food-type">Food Type</div>
+                    <select class="select-full form__food--type">
+                      <option value="" selected>select</option>
+                      <option value="american">American Cuisine</option>
+                      <option value="bakery">Bakery</option>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="chinese">Chinese Cuisine</option>
+                      <option value="beverage">Coffee/Beverage</option>
+                      <option value="sweets">Ice Cream/Sweets</option>
+                      <option value="filipino">Filipino Cuisine</option>
+                      <option value="fusion">Fusion Cuisine</option>
+                      <option value="indian">Indian Cuisine</option>
+                      <option value="italian">Italian Cuisine</option>
+                      <option value="japanese">Japanese Cuisine</option>
+                      <option value="korean">Korean Cuisine</option>
+                      <option value="mexican">Mexican Cuisine</option>
+                      <option value="mideast">Middle Eastern Cuisine</option>
+                      <option value="other">Other</option>
+                      <option value="thai">Thai Cuisine</option>
+                      <option value="vegetarian">Vegetarian/Vegan Cuisine</option>
+                    </select>
+                  </label>
+
+                  <fieldset class="fieldset-checkbox fieldset-checkbox-destructive form__checkbox--seating'">
+                    <label><input type="checkbox">Outdoor Seating</label>
+                  </fieldset>
+
+                  <button class="form__btn btn">Map It!</button>
+
+                </div>
+              </div>
+            </article>
+
+            <article class="tab-section js-tab-section tab-content-list">
+              <p>Click on the map to create a new street food location list item </p>
+
+              <div class="card card-wide">
+                <div class="card-content">
+                  <h4 class="trailer-half"><a href="#">Wide Cards</a></h4>
+                  <p class="font-size--1 trailer-half">Wide cards are just like standard cards except that they are
+                    displayed in landscape orientation. This is useful in situations where there is too much content to
+                    display well in a standard card.</p>
+                  <p class="font-size--1 trailer-half">Generally wide cards are meant to be displayed one-up, not
+                    grouped.</p>
+                </div>
+              </div>
+            </article>
+
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- map -->
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <script src="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/js/calcite-web.min.js">
+  </script>
+  <script defer src="script.js"></script>
+  <script>
+    calcite.init()
+  </script>
+</body>
+
+</html>
