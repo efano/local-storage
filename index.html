@@ -42,6 +42,7 @@
 
               <div class="card form card-form">
                 <div class="card-content streetFood">
+                  <form>
 
                   <!-- <fieldset class="radio-group form__vendor--type">
                     <legend class="radio-group-title">Vendor Type</legend>
@@ -55,47 +56,48 @@
                     <label class="radio-group-label btn-group select-full" for="booth"><img class="btn-img img-booth"
                         src="img/food-booth.svg" alt="food booth icon">Food Booth</label>
                   </fieldset> -->
+                  
+                    <label>
+                      <div for="vendor" class="vendor-type">Vendor Type:</div>
+                      <select name="vendor" id="vendor" class="select-full form__vendor--type" required>
+                        <option value="">select</option>
+                        <option value="truck">Food Truck</option>
+                        <option value="cart">Food Cart</option>
+                        <option value="booth">Food Booth</option>
+                      </select>
+                    </label>
 
-                  <label>
-                    <div class="vendor-type">Vendor Type</div>
-                    <select class="select-full form__vendor--type">
-                      <option value="" selected>select</option>
-                      <option value="truck">Food Truck</option>
-                      <option value="cart">Food Cart</option>
-                      <option value="booth">Food Booth</option>
-                    </select>
-                  </label>
+                    <label>
+                      <div class="food-type">Food Type:</div>
+                      <select class="select-full form__food--type" required>
+                        <option value="">select</option>
+                        <option value="american">American Cuisine</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="chinese">Chinese Cuisine</option>
+                        <option value="beverage">Coffee/Beverage</option>
+                        <option value="sweets">Ice Cream/Sweets</option>
+                        <option value="filipino">Filipino Cuisine</option>
+                        <option value="fusion">Fusion Cuisine</option>
+                        <option value="indian">Indian Cuisine</option>
+                        <option value="italian">Italian Cuisine</option>
+                        <option value="japanese">Japanese Cuisine</option>
+                        <option value="korean">Korean Cuisine</option>
+                        <option value="mexican">Mexican Cuisine</option>
+                        <option value="mideast">Middle Eastern Cuisine</option>
+                        <option value="other">Other</option>
+                        <option value="thai">Thai Cuisine</option>
+                        <option value="vegetarian">Vegetarian/Vegan Cuisine</option>
+                      </select>
+                    </label>
 
-                  <label>
-                    <div class="food-type">Food Type</div>
-                    <select class="select-full form__food--type">
-                      <option value="" selected>select</option>
-                      <option value="american">American Cuisine</option>
-                      <option value="bakery">Bakery</option>
-                      <option value="breakfast">Breakfast</option>
-                      <option value="chinese">Chinese Cuisine</option>
-                      <option value="beverage">Coffee/Beverage</option>
-                      <option value="sweets">Ice Cream/Sweets</option>
-                      <option value="filipino">Filipino Cuisine</option>
-                      <option value="fusion">Fusion Cuisine</option>
-                      <option value="indian">Indian Cuisine</option>
-                      <option value="italian">Italian Cuisine</option>
-                      <option value="japanese">Japanese Cuisine</option>
-                      <option value="korean">Korean Cuisine</option>
-                      <option value="mexican">Mexican Cuisine</option>
-                      <option value="mideast">Middle Eastern Cuisine</option>
-                      <option value="other">Other</option>
-                      <option value="thai">Thai Cuisine</option>
-                      <option value="vegetarian">Vegetarian/Vegan Cuisine</option>
-                    </select>
-                  </label>
+                    <fieldset class="fieldset-checkbox fieldset-checkbox-destructive form__checkbox--seating'">
+                      <label><input type="checkbox">Outdoor Seating</label>
+                    </fieldset>
 
-                  <fieldset class="fieldset-checkbox fieldset-checkbox-destructive form__checkbox--seating'">
-                    <label><input type="checkbox">Outdoor Seating</label>
-                  </fieldset>
+                    <button type="" class="form__btn btn select-full">Map Location</button>
 
-                  <button class="form__btn btn">Map Location</button>
-
+                  </form>
                 </div>
               </div>
             </article>
