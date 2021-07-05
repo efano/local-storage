@@ -1,6 +1,5 @@
 'use strict';
 
-// prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const tabInfo = document.querySelector('.tab-info');
@@ -47,7 +46,8 @@ if (navigator.geolocation)
         fillOpacity: 0.4
       }).addTo(map)
 
-      map.on('click', function (mapEvent) {
+      map.on('click', function (mapE) {
+        mapEvent = mapE;
         tabForm.classList.remove('tab-disabled');
         tabInfo.classList.remove('is-active');
         tabList.classList.remove('is-active');
@@ -55,21 +55,7 @@ if (navigator.geolocation)
         tabContentInfo.classList.remove('is-active');
         tabContentList.classList.remove('is-active');
         tabContentForm.classList.add('is-active');
-        
-        const {lat, lng} = mapEvent.latlng;
-
-        L.marker([lat,lng])
-          .addTo(map)
-          .bindTooltip(
-            L.tooltip({
-              className: 'truck-tooltip'
-            })
-          )
-          .setTooltipContent('Vegetarian/Vegan Cuisine')
-
-        // mapEvent = mapE;
-        // form.classList.remove('hidden');
-        // inputDistance.focus();
+        vendorType.focus();
       });
 
     },
@@ -78,31 +64,18 @@ if (navigator.geolocation)
     }
   );
 
-  // form.addEventListener('submit', function (e) {
-  //   e.preventDefault();
-  //   // clear input fields
-  //   inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+  document.getElementById('form__btn').addEventListener("click", function() {
+    //e.preventDefault();
+    document.getElementById('form').reset();
 
-  //   const {lat, lng} = mapEvent.latlng   
-    
-  //   L.circleMarker([lat, lng], {
-  //   }).addTo(map)
-  //         .bindPopup(L.popup({
-  //           maxWidth: 250,
-  //           minWidth: 100,
-  //           autoClose: false,
-  //           closeOnClick: false,
-  //           className: 'running-popup'
-  //         }))
-  //         .setPopupContent('Workout')
-  //         .openPopup();
+    const {lat, lng} = mapEvent.latlng;
 
-  // });
-
-  // inputType.addEventListener('change', function () {
-  //   inputElevation.closest('.form__row').classList.toggle('form__row--hidden')
-  //   inputCadence.closest('.form__row').classList.toggle('form__row--hidden')
-  // });
-
-  
-
+        L.marker([lat,lng])
+          .addTo(map)
+          .bindTooltip(
+            L.tooltip({
+              className: 'stand-tooltip'
+            })
+          )
+          .setTooltipContent('Vegetarian/Vegan Cuisine')
+  });
