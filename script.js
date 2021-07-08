@@ -13,8 +13,9 @@ const containerStreetFood = document.querySelector('.streetFood');
 const inputVendorType = document.querySelector('.form__vendor--type');
 const inputFoodType = document.querySelector('.form__food--type');
 const inputSeating = document.querySelector('.form__checkbox--inputSeating');
+const legend = document.querySelector('.legend');
 
-class formEntry {
+class FormEntry {
   date = new Date();
   id = (Date.now() + '').slice(-10);
 
@@ -63,16 +64,20 @@ class App {
     const options = {
       center: coords,
       layers: basemap,
+      zoomControl: false,
       zoom: 16
     };
+    
     this.#map = L.map('map', options).locate({
       watch: true
     });
 
+    new L.Control.Zoom({ position: 'topright' }).addTo(this.#map);
+
     L.circleMarker(coords, {
       interactive: false,
       className: 'pulse',
-      radius: 3,
+      radius: 2.5,
       weight: 0.5,
       color: '#323232',
       fillColor: '#F7B40A',
@@ -97,6 +102,7 @@ class App {
   _newLocation(e) {
     e.preventDefault();
     document.getElementById('form').reset();
+    legend.classList.remove('legend-disabled');
 
     const {
       lat,
@@ -107,11 +113,13 @@ class App {
       iconUrl: 'img/marker.svg',
       iconSize: [40, 40],
       iconAnchor: [20, 38],
-      tooltipAnchor:  [15, -25]
+      tooltipAnchor:  [15, -25],
+      className: 'marker-icon'
     });
 
     L.marker([lat, lng], {
       icon: icon,
+      draggable: true
     })
       .addTo(this.#map)
       .bindTooltip(
