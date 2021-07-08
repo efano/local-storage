@@ -10,10 +10,24 @@ const tabList = document.querySelector('.tab-list');
 const tabContentList = document.querySelector('.tab-content-list');
 const form = document.querySelector('.form');
 const containerStreetFood = document.querySelector('.streetFood');
-const vendorType = document.querySelector('.form__vendor--type');
-const foodType = document.querySelector('.form__food--type');
-const seating = document.querySelector('.form__checkbox--seating');
+const inputVendorType = document.querySelector('.form__vendor--type');
+const inputFoodType = document.querySelector('.form__food--type');
+const inputSeating = document.querySelector('.form__checkbox--inputSeating');
 
+class formEntry {
+  date = new Date();
+  id = (Date.now() + '').slice(-10);
+
+  constructor(coords, vendorType, foodType, seating) {
+    this.coords = coords;
+    this.vendorType = vendorType;
+    this.foodType = foodType;
+    this.seating = seating;
+  }
+}
+
+///////////////////////////////////////
+// APPLICATION ARCHITECTURE
 class App {
   #map;
   #mapEvent;
@@ -59,10 +73,10 @@ class App {
       interactive: false,
       className: 'pulse',
       radius: 3,
-      weight: 2,
-      color: '#F7B40A',
+      weight: 0.5,
+      color: '#323232',
       fillColor: '#F7B40A',
-      fillOpacity: 0.4
+      fillOpacity: 1
     }).addTo(this.#map)
 
     this.#map.on('click', this._showForm.bind(this));
@@ -77,7 +91,7 @@ class App {
       tabContentInfo.classList.remove('is-active');
       tabContentList.classList.remove('is-active');
       tabContentForm.classList.add('is-active');
-      vendorType.focus();
+      inputVendorType.focus();
   }
 
   _newLocation(e) {
@@ -89,7 +103,16 @@ class App {
       lng
     } = this.#mapEvent.latlng;
 
-    L.marker([lat, lng])
+    const icon = L.icon({
+      iconUrl: 'img/marker.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 38],
+      tooltipAnchor:  [15, -25]
+    });
+
+    L.marker([lat, lng], {
+      icon: icon,
+    })
       .addTo(this.#map)
       .bindTooltip(
         L.tooltip({

@@ -105,8 +105,6 @@
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(81, 167, 232, 0.5);
 }
 
-
-
 /* MAP */
 .map-container {
   flex-grow: 1;
@@ -146,7 +144,7 @@
 }
 
 .leaflet-tooltip-right:before {
-  left: -3px;
+  left: -4px;
 	border-right-color: #fff;
 	}
 
