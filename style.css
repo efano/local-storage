@@ -166,6 +166,10 @@
   100% {-webkit-transform: scale 0.0; opacity: 0.0;}
 }
 
+/* .marker-icon:hover {
+  stroke: #338033;
+} */
+
 .leaflet-tooltip {
   max-width: 250px;
   min-width: 100px;

@@ -17,7 +17,6 @@
 
   <title>Local Storage Example</title>
 </head>
-
 <body>
   <div id="container">
     <!-- side navigation -->
@@ -27,14 +26,13 @@
 
         <div class="modifier-class trailer-2 js-tab-group tabs-transparent">
           <nav class="tab-nav">
-            <a class="tab-title is-active js-tab tab-info">Info</a>
+            <a class="tab-title js-tab tab-info">Info</a>
             <a class="tab-title js-tab tab-disabled tab-form">Form</a>
-            <a class="tab-title js-tab tab-list">List</a>
+            <a class="tab-title is-active js-tab tab-list">List</a>
           </nav>
           <section class="tab-contents">
 
-            <article class="tab-section js-tab-section is-active tab-content-info animate-fade-in">
-              <p>Click on the map to begin collecting data</p>
+            <article class="tab-section js-tab-section tab-content-info animate-fade-in">
               <p>About this project...</p>
             </article>
 
@@ -43,27 +41,14 @@
               <div class="card form card-form">
                 <div class="card-content streetFood">
                   <form id="form">
-
-                  <!-- <fieldset class="radio-group form__vendor--type">
-                    <legend class="radio-group-title">Vendor Type</legend>
-                    <input class="radio-group-input btn-group" type="radio" id="truck" name="vendor" />
-                    <label class="radio-group-label btn-group select-full" for="truck"><img class="btn-img img-truck"
-                        src="img/food-truck.svg" alt="food truck icon">Food Truck</label>
-                    <input class="radio-group-input btn-group" type="radio" id="cart" name="vendor" />
-                    <label class="radio-group-label btn-group select-full" for="cart"><img class="btn-img img-cart"
-                        src="img/food-cart.svg" alt="food cart icon">Food Cart</label>
-                    <input class="radio-group-input btn-group" type="radio" id="booth" name="vendor" />
-                    <label class="radio-group-label btn-group select-full" for="booth"><img class="btn-img img-booth"
-                        src="img/food-booth.svg" alt="food booth icon">Food Booth</label>
-                  </fieldset> -->
-                  
+              
                     <label>
                       <div for="vendor" class="vendor-type">Vendor Type:</div>
                       <select name="vendor" id="vendor" class="select-full form__vendor--type" required>
                         <option value="">select</option>
-                        <option value="truck">Food Truck</option>
-                        <option value="cart">Food Cart</option>
-                        <option value="stand">Food Stand</option>
+                        <option value="food truck">Food Truck</option>
+                        <option value="food cart">Food Cart</option>
+                        <option value="food stand">Food Stand</option>
                       </select>
                     </label>
 
@@ -71,28 +56,30 @@
                       <div class="food-type">Food Type:</div>
                       <select class="select-full form__food--type" required>
                         <option value="">select</option>
-                        <option value="american">American Cuisine</option>
-                        <option value="bakery">Bakery</option>
+                        <option value="American cuisine">American Cuisine</option>
+                        <option value="baked items">Bakery</option>
                         <option value="breakfast">Breakfast</option>
-                        <option value="chinese">Chinese Cuisine</option>
-                        <option value="beverage">Coffee/Beverage</option>
-                        <option value="sweets">Ice Cream/Sweets</option>
-                        <option value="filipino">Filipino Cuisine</option>
-                        <option value="fusion">Fusion Cuisine</option>
-                        <option value="indian">Indian Cuisine</option>
-                        <option value="italian">Italian Cuisine</option>
-                        <option value="japanese">Japanese Cuisine</option>
-                        <option value="korean">Korean Cuisine</option>
-                        <option value="mexican">Mexican Cuisine</option>
-                        <option value="mideast">Middle Eastern Cuisine</option>
+                        <option value="Chinese cuisine">Chinese Cuisine</option>
+                        <option value="beverages">Coffee/Beverage</option>
+                        <option value="desserts">Ice Cream/Sweets</option>
+                        <option value="Filipino cuisine">Filipino Cuisine</option>
+                        <option value="fusion cuisine">Fusion Cuisine</option>
+                        <option value="Indian cuisine">Indian Cuisine</option>
+                        <option value="Italian cuisine">Italian Cuisine</option>
+                        <option value="Japanese cuisine">Japanese Cuisine</option>
+                        <option value="Korean cuisine">Korean Cuisine</option>
+                        <option value="Mexican cuisine">Mexican Cuisine</option>
+                        <option value="Mideast cuisine">Middle Eastern Cuisine</option>
                         <option value="other">Other</option>
-                        <option value="thai">Thai Cuisine</option>
-                        <option value="vegetarian">Vegetarian/Vegan Cuisine</option>
+                        <option value="Thai cuisine">Thai Cuisine</option>
+                        <option value="Vegetarian/Vegan cuisine">Vegetarian/Vegan Cuisine</option>
                       </select>
                     </label>
 
-                    <fieldset class="fieldset-checkbox fieldset-checkbox-destructive form__checkbox--seating'">
-                      <label><input class="checkbox" type="checkbox">Outdoor Seating</label>
+                    <fieldset class="fieldset-checkbox">
+                      <label>
+                        <input class="checkbox" type="checkbox" name="seating" value="seating">Outdoor Seating
+                      </label>
                     </fieldset>
 
                     <button type="" class="form__btn btn select-full" id="form__btn">Map Location</button>
@@ -102,17 +89,12 @@
               </div>
             </article>
 
-            <article class="tab-section js-tab-section tab-content-list animate-fade-in">
-              <p>Click on the map to add a new street food location list item </p>
+            <article class="tab-section js-tab-section is-active tab-content-list animate-fade-in">
+              <p>Click on the map to add a new street food location list item... </p>
 
               <div class="card card-wide card-bar-red">
                 <div class="card-content">
-                  <h4 class="trailer-half"><a href="#">Wide Cards</a></h4>
-                  <p class="font-size--1 trailer-half">Wide cards are just like standard cards except that they are
-                    displayed in landscape orientation. This is useful in situations where there is too much content to
-                    display well in a standard card.</p>
-                  <p class="font-size--1 trailer-half">Generally wide cards are meant to be displayed one-up, not
-                    grouped.</p>
+                  <p class="font-size--1 trailer-half">🌶️ A food truck serving American cuisine was spotted on July 9</p>
                 </div>
               </div>
             </article>

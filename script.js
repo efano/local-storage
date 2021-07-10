@@ -12,17 +12,17 @@ const form = document.querySelector('.form');
 const containerStreetFood = document.querySelector('.streetFood');
 const inputVendorType = document.querySelector('.form__vendor--type');
 const inputFoodType = document.querySelector('.form__food--type');
-const inputSeating = document.querySelector('.form__checkbox--inputSeating');
+const inputSeating = document.querySelector('.checkbox');
 const legend = document.querySelector('.legend');
 
-class FormEntry {
+class Card {
   date = new Date();
   id = (Date.now() + '').slice(-10);
 
-  constructor(coords, vendorType, foodType, seating) {
+  constructor(coords, vendor, food, seating) {
     this.coords = coords;
-    this.vendorType = vendorType;
-    this.foodType = foodType;
+    this.vendor = vendor;
+    this.food = food;
     this.seating = seating;
   }
 }
@@ -32,6 +32,7 @@ class FormEntry {
 class App {
   #map;
   #mapEvent;
+  #cards = [];
 
   constructor() {
     this._getPosition();
@@ -101,13 +102,25 @@ class App {
 
   _newLocation(e) {
     e.preventDefault();
-    document.getElementById('form').reset();
+    // document.getElementById('form').reset();
     legend.classList.remove('legend-disabled');
 
-    const {
-      lat,
-      lng
-    } = this.#mapEvent.latlng;
+    // get data from form
+    const vendor = inputVendorType.value;
+    const food = inputFoodType.value;
+    const seating = inputSeating.checked;
+    const {lat,lng} = this.#mapEvent.latlng;
+    let card;
+
+    
+    
+    // create new card object
+    card = new Card({lat,lng}, vendor, food, seating);
+    this.#cards.push(card);
+    console.log("log: ", card);
+    
+
+
 
     const icon = L.icon({
       iconUrl: 'img/marker.svg',
