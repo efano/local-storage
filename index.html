@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet"
     href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
   <link rel="stylesheet" href="style.css" />
@@ -45,34 +45,35 @@
                     <label>
                       <div for="vendor" class="vendor-type">Vendor Type:</div>
                       <select name="vendor" id="vendor" class="select-full form__vendor--type" required>
-                        <option value="">select</option>
                         <option value="food truck">Food Truck</option>
                         <option value="food cart">Food Cart</option>
                         <option value="food stand">Food Stand</option>
                       </select>
+                      <div class="input-error-message vendor-error">
+                        Select vendor type
+                      </div>
                     </label>
 
                     <label>
                       <div class="food-type">Food Type:</div>
                       <select class="select-full form__food--type" required>
-                        <option value="">select</option>
-                        <option value="American cuisine">American Cuisine</option>
-                        <option value="baked items">Bakery</option>
-                        <option value="breakfast">Breakfast</option>
-                        <option value="Chinese cuisine">Chinese Cuisine</option>
-                        <option value="beverages">Coffee/Beverage</option>
-                        <option value="desserts">Ice Cream/Sweets</option>
-                        <option value="Filipino cuisine">Filipino Cuisine</option>
-                        <option value="fusion cuisine">Fusion Cuisine</option>
-                        <option value="Indian cuisine">Indian Cuisine</option>
-                        <option value="Italian cuisine">Italian Cuisine</option>
-                        <option value="Japanese cuisine">Japanese Cuisine</option>
-                        <option value="Korean cuisine">Korean Cuisine</option>
-                        <option value="Mexican cuisine">Mexican Cuisine</option>
-                        <option value="Mideast cuisine">Middle Eastern Cuisine</option>
-                        <option value="other">Other</option>
-                        <option value="Thai cuisine">Thai Cuisine</option>
-                        <option value="Vegetarian/Vegan cuisine">Vegetarian/Vegan Cuisine</option>
+                        <option value="American Cuisine">American Cuisine</option>
+                        <option value="Bakery">Bakery</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Chinese Cuisine">Chinese Cuisine</option>
+                        <option value="Coffee/Beverages">Coffee/Beverages</option>
+                        <option value="Ice Cream/Desserts">Ice Cream/Desserts</option>
+                        <option value="Filipino Cuisine">Filipino Cuisine</option>
+                        <option value="Fusion Cuisine">Fusion Cuisine</option>
+                        <option value="Indian Cuisine">Indian Cuisine</option>
+                        <option value="Italian Cuisine">Italian Cuisine</option>
+                        <option value="Japanese Cuisine">Japanese Cuisine</option>
+                        <option value="Korean Cuisine">Korean Cuisine</option>
+                        <option value="Mexican Cuisine">Mexican Cuisine</option>
+                        <option value="Middle Eastern Cuisine">Middle Eastern Cuisine</option>
+                        <option value="Other">Other</option>
+                        <option value="Thai Cuisine">Thai Cuisine</option>
+                        <option value="Vegetarian/Vegan Cuisine">Vegetarian/Vegan Cuisine</option>
                       </select>
                     </label>
 
@@ -82,7 +83,7 @@
                       </label>
                     </fieldset>
 
-                    <button type="" class="form__btn btn select-full" id="form__btn">Map Location</button>
+                    <button type="" class="form__btn btn select-full " id="form__btn">Map Location</button>
 
                   </form>
                 </div>

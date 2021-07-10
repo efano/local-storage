@@ -1,20 +1,5 @@
 'use strict';
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-const tabInfo = document.querySelector('.tab-info');
-const tabContentInfo = document.querySelector('.tab-content-info');
-const tabForm = document.querySelector('.tab-form');
-const tabContentForm = document.querySelector('.tab-content-form');
-const tabList = document.querySelector('.tab-list');
-const tabContentList = document.querySelector('.tab-content-list');
-const form = document.querySelector('.form');
-const containerStreetFood = document.querySelector('.streetFood');
-const inputVendorType = document.querySelector('.form__vendor--type');
-const inputFoodType = document.querySelector('.form__food--type');
-const inputSeating = document.querySelector('.checkbox');
-const legend = document.querySelector('.legend');
-
 class Card {
   date = new Date();
   id = (Date.now() + '').slice(-10);
@@ -27,8 +12,22 @@ class Card {
   }
 }
 
-///////////////////////////////////////
-// APPLICATION ARCHITECTURE
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const tabInfo = document.querySelector('.tab-info');
+const tabContentInfo = document.querySelector('.tab-content-info');
+const tabForm = document.querySelector('.tab-form');
+const tabContentForm = document.querySelector('.tab-content-form');
+const tabList = document.querySelector('.tab-list');
+const tabContentList = document.querySelector('.tab-content-list');
+const form = document.querySelector('.form');
+const containerStreetFood = document.querySelector('.streetFood');
+const inputVendorType = document.querySelector('.form__vendor--type');
+const vendorError = document.querySelector('.vendor-error');
+const inputFoodType = document.querySelector('.form__food--type');
+const inputSeating = document.querySelector('.checkbox');
+const legend = document.querySelector('.legend');
+
 class App {
   #map;
   #mapEvent;
@@ -111,37 +110,87 @@ class App {
     const seating = inputSeating.checked;
     const {lat,lng} = this.#mapEvent.latlng;
     let card;
-
-    
     
     // create new card object
     card = new Card({lat,lng}, vendor, food, seating);
     this.#cards.push(card);
-    console.log("log: ", card);
+    console.log(card);
     
+    // render marker on map
+    this._renderMarker(card);
 
+    // render workout on list
 
+    // hide form and clear input fields
+  }
 
-    const icon = L.icon({
-      iconUrl: 'img/marker.svg',
+  _renderMarker(card) {
+    const redMarker = L.icon({
+      iconUrl: 'img/marker-red.svg',
       iconSize: [40, 40],
       iconAnchor: [20, 38],
-      tooltipAnchor:  [15, -25],
-      className: 'marker-icon'
+      tooltipAnchor:  [15, -25]
     });
 
-    L.marker([lat, lng], {
-      icon: icon,
-      draggable: true
-    })
-      .addTo(this.#map)
-      .bindTooltip(
-        L.tooltip({
-          className: 'stand-tooltip'
-        })
-      )
-      .setTooltipContent('Vegetarian/Vegan Cuisine')
-  }
+    const greenMarker = L.icon({
+      iconUrl: 'img/marker-green.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 38],
+      tooltipAnchor:  [15, -25]
+    });
+
+    const blueMarker = L.icon({
+      iconUrl: 'img/marker-blue.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 38],
+      tooltipAnchor:  [15, -25]
+    });
+
+    const markerType = card.vendor;
+    const foodType = card.food;
+
+    if (markerType === "food truck") {
+      L.marker(card.coords, {
+        icon: blueMarker,
+        draggable: true,
+      })
+        .addTo(this.#map)
+        .bindTooltip(
+          L.tooltip({
+            className: 'truck-tooltip'
+          })
+        )
+        .setTooltipContent(foodType);
+    };
+
+    if (markerType === "food cart") {
+      L.marker(card.coords, {
+        icon: greenMarker,
+        draggable: true,
+      })
+        .addTo(this.#map)
+        .bindTooltip(
+          L.tooltip({
+            className: 'cart-tooltip'
+          })
+        )
+        .setTooltipContent(foodType);
+    };
+
+    if (markerType === "food stand") {
+      L.marker(card.coords, {
+        icon: redMarker,
+        draggable: true,
+      })
+        .addTo(this.#map)
+        .bindTooltip(
+          L.tooltip({
+            className: 'stand-tooltip'
+          })
+        )
+        .setTooltipContent(foodType);
+    }
+  };
 }
 
 const app = new App();

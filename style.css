@@ -114,7 +114,7 @@
 }
 
 .leaflet-container {
-	font: 12px/1.5 Montserrat, sans-serif;
+	font: 12px/1.5 Nunito, sans-serif;
 	}
 
 #map{
@@ -130,7 +130,7 @@
 }
 
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
-  font: 18px Montserrat, monospace;
+  font: 18px Nunito, monospace;
 }
 
 .leaflet-touch .leaflet-control-layers,
@@ -171,8 +171,7 @@
 } */
 
 .leaflet-tooltip {
-  max-width: 250px;
-  min-width: 100px;
+  width: fit-content;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 16px 0 rgba(0, 0, 0, 0.05);
   border: 0px;
   border-radius: 1px;
