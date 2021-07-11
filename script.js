@@ -125,25 +125,25 @@ class App {
   }
 
   _renderMarker(card) {
-    const redMarker = L.icon({
+
+    const markerOptions = L.Icon.extend({
+      options: {
+        iconSize: [40, 40],
+        iconAnchor: [20, 38],
+        tooltipAnchor:  [15, -25],
+      }
+  });
+
+    const redMarker = new markerOptions ({
       iconUrl: 'img/marker-red.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 38],
-      tooltipAnchor:  [15, -25]
     });
 
-    const greenMarker = L.icon({
+    const greenMarker = new markerOptions ({
       iconUrl: 'img/marker-green.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 38],
-      tooltipAnchor:  [15, -25]
     });
 
-    const blueMarker = L.icon({
+    const blueMarker = new markerOptions ({
       iconUrl: 'img/marker-blue.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 38],
-      tooltipAnchor:  [15, -25]
     });
 
     const markerType = card.vendor;
@@ -152,7 +152,7 @@ class App {
     if (markerType === "food truck") {
       L.marker(card.coords, {
         icon: blueMarker,
-        draggable: true,
+        draggable: true
       })
         .addTo(this.#map)
         .bindTooltip(
