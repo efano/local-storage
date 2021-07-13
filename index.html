@@ -45,18 +45,20 @@
                     <label>
                       <div for="vendor" class="vendor-type">Vendor Type:</div>
                       <select name="vendor" id="vendor" class="select-full form__vendor--type" required>
+                        <option value="" selected>select</option>
                         <option value="food truck">Food Truck</option>
                         <option value="food cart">Food Cart</option>
                         <option value="food stand">Food Stand</option>
                       </select>
                       <div class="input-error-message vendor-error">
-                        Select vendor type
+                        A vendor type is required
                       </div>
                     </label>
 
                     <label>
                       <div class="food-type">Food Type:</div>
                       <select class="select-full form__food--type" required>
+                        <option value="" selected>select</option>
                         <option value="American Cuisine" alt="🍔">American Cuisine</option>
                         <option value="Bakery" alt="🥖">Bakery</option>
                         <option value="Breakfast" alt="🥐">Breakfast</option>
@@ -76,6 +78,9 @@
                         <option value="Vegetarian/Vegan Cuisine" alt="🥗">Vegetarian/Vegan Cuisine</option>
                         <option value="Vietnamese Cuisine" alt="🍜">Vietnamese Cuisine</option>
                       </select>
+                      <div class="input-error-message food-error">
+                        A food type is required
+                      </div>
                     </label>
 
                     <fieldset class="fieldset-checkbox">
@@ -96,7 +101,7 @@
 
               <div class="card card-wide card-bar-red">
                 <div class="card-content">
-                  <p class="font-size--1 trailer-half">🍕 A food truck serving American cuisine was spotted on July 9</p>
+                  
                 </div>
               </div>
             </article>
@@ -110,9 +115,9 @@
       <div id="map">
         <div class="card block animate-fade-in legend legend-disabled">
           <div class="card-content">
-            <p class="font-size--1 card-last"><span class="icon-ui-map-pin icon-ui-blue"></span>Food Truck</p>
-            <p class="font-size--1 card-last"><span class="icon-ui-map-pin icon-ui-green"></span>Food Cart</p>
-            <p class="font-size--1 card-last"><span class="icon-ui-map-pin icon-ui-red"></span>Food Stand</p>
+            <p class="font-size--1 card-last"><span class="icon-ui-map-pin icon-ui-blue markers-legend"></span>Food Truck</p>
+            <p class="font-size--1 card-last"><span class="icon-ui-map-pin icon-ui-green markers-legend"></span>Food Cart</p>
+            <p class="font-size--1 card-last"><span class="icon-ui-map-pin icon-ui-red markers-legend"></span>Food Stand</p>
           </div>
         </div>
       </div>

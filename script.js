@@ -25,6 +25,7 @@ const containerStreetFood = document.querySelector('.streetFood');
 const inputVendorType = document.querySelector('.form__vendor--type');
 const vendorError = document.querySelector('.vendor-error');
 const inputFoodType = document.querySelector('.form__food--type');
+const foodError = document.querySelector('.food-error');
 const inputSeating = document.querySelector('.checkbox');
 const legend = document.querySelector('.legend');
 
@@ -90,19 +91,17 @@ class App {
   _showForm(mapE) {
     this.#mapEvent = mapE;
       tabForm.classList.remove('tab-disabled');
-      tabInfo.classList.remove('is-active');
       tabList.classList.remove('is-active');
       tabForm.classList.add('is-active');
-      tabContentInfo.classList.remove('is-active');
       tabContentList.classList.remove('is-active');
       tabContentForm.classList.add('is-active');
+      vendorError.classList.remove('is-active');
+      foodError.classList.remove('is-active');
       inputVendorType.focus();
   }
 
   _newLocation(e) {
     e.preventDefault();
-    // document.getElementById('form').reset();
-    legend.classList.remove('legend-disabled');
 
     // get data from form
     const vendor = inputVendorType.value;
@@ -110,18 +109,32 @@ class App {
     const seating = inputSeating.checked;
     const {lat,lng} = this.#mapEvent.latlng;
     let card;
-    
+
+    if (
+      vendor === ''
+    ) 
+      return vendorError.classList.add('is-active');
+
+    if (
+        food === ''
+    ) 
+      return foodError.classList.add('is-active');
+
     // create new card object
     card = new Card({lat,lng}, vendor, food, seating);
     this.#cards.push(card);
     console.log(card);
     
-    // render marker on map
     this._renderMarker(card);
+    //this._renderCard(card);
 
-    // render workout on list
-
-    // hide form and clear input fields
+    legend.classList.remove('legend-disabled');
+    tabForm.classList.remove('is-active');
+    tabContentForm.classList.remove('is-active');
+    tabList.classList.add('is-active');
+    tabContentList.classList.add('is-active');
+    tabForm.classList.add('tab-disabled');
+    document.getElementById('form').reset();
   }
 
   _renderMarker(card) {
@@ -131,6 +144,7 @@ class App {
         iconSize: [40, 40],
         iconAnchor: [20, 38],
         tooltipAnchor:  [15, -25],
+        className: 'markers'
       }
   });
 
@@ -189,8 +203,45 @@ class App {
           })
         )
         .setTooltipContent(foodType);
-    }
+    };
   };
+
+  // _renderCard(card) {
+  //   let html = `
+  //     <li class="workout workout--${workout.type}" data-id="${workout.id}">
+  //       <h2 class="workout__title">${workout.description}</h2>
+  //       <div class="workout__details">
+  //         <span class="workout__icon">${
+  //           workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
+  //         }</span>
+  //         <span class="workout__value">${workout.distance}</span>
+  //         <span class="workout__unit">km</span>
+  //       </div>
+  //       <div class="workout__details">
+  //         <span class="workout__icon">⏱</span>
+  //         <span class="workout__value">${workout.duration}</span>
+  //         <span class="workout__unit">min</span>
+  //       </div>
+  //   `;
+
+  //   <p class="font-size--1 trailer-half">🍕 A food truck serving American cuisine was spotted on July 9</p>
+
+  //   if (workout.type === 'cycling')
+  //     html += `
+  //       <div class="workout__details">
+  //         <span class="workout__icon">⚡️</span>
+  //         <span class="workout__value">${workout.speed.toFixed(1)}</span>
+  //         <span class="workout__unit">km/h</span>
+  //       </div>
+  //       <div class="workout__details">
+  //         <span class="workout__icon">⛰</span>
+  //         <span class="workout__value">${workout.elevationGain}</span>
+  //         <span class="workout__unit">m</span>
+  //       </div>
+  //     </li>
+  //     `;
+
+  // }
 }
 
 const app = new App();

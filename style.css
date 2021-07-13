@@ -166,9 +166,15 @@
   100% {-webkit-transform: scale 0.0; opacity: 0.0;}
 }
 
-/* .marker-icon:hover {
-  stroke: #338033;
-} */
+.markers{
+  filter: 
+  drop-shadow(2px 1px 1px #ccc)
+}
+
+.markers-legend{
+  filter: 
+  drop-shadow(1px 1px 1px #ccc)
+}
 
 .leaflet-tooltip {
   width: fit-content;
