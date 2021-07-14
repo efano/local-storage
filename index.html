@@ -26,7 +26,7 @@
 
         <div class="modifier-class trailer-2 js-tab-group tabs-transparent">
           <nav class="tab-nav">
-            <a class="tab-title js-tab tab-info">Info</a>
+            <a class="tab-title js-tab tab-info">About</a>
             <a class="tab-title js-tab tab-disabled tab-form">Form</a>
             <a class="tab-title is-active js-tab tab-list">List</a>
           </nav>
@@ -50,14 +50,14 @@
                         <option value="food cart">Food Cart</option>
                         <option value="food stand">Food Stand</option>
                       </select>
-                      <div class="input-error-message vendor-error">
+                      <div class="input-error-message vendor-error animate-fade-in">
                         A vendor type is required
                       </div>
                     </label>
 
                     <label>
-                      <div class="food-type">Food Type:</div>
-                      <select class="select-full form__food--type" required>
+                      <div for="food" class="food-type">Food Type:</div>
+                      <select name="food" id="food" class="select-full form__food--type" required>
                         <option value="" selected>select</option>
                         <option value="American Cuisine" alt="🍔">American Cuisine</option>
                         <option value="Bakery" alt="🥖">Bakery</option>
@@ -78,7 +78,7 @@
                         <option value="Vegetarian/Vegan Cuisine" alt="🥗">Vegetarian/Vegan Cuisine</option>
                         <option value="Vietnamese Cuisine" alt="🍜">Vietnamese Cuisine</option>
                       </select>
-                      <div class="input-error-message food-error">
+                      <div class="input-error-message food-error animate-fade-in">
                         A food type is required
                       </div>
                     </label>

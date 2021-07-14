@@ -95,8 +95,6 @@ class App {
       tabForm.classList.add('is-active');
       tabContentList.classList.remove('is-active');
       tabContentForm.classList.add('is-active');
-      vendorError.classList.remove('is-active');
-      foodError.classList.remove('is-active');
       inputVendorType.focus();
   }
 
@@ -110,15 +108,19 @@ class App {
     const {lat,lng} = this.#mapEvent.latlng;
     let card;
 
-    if (
-      vendor === ''
-    ) 
-      return vendorError.classList.add('is-active');
+    if (vendor === '') {
+      vendorError.classList.add('is-active');
+      inputVendorType.focus();
+      setTimeout(() => (vendorError.classList.remove('is-active')), 2500); 
+    return false;
+    };
 
-    if (
-        food === ''
-    ) 
-      return foodError.classList.add('is-active');
+    if (food === '') {
+      foodError.classList.add('is-active');
+      //inputFoodType.focus();
+      setTimeout(() => (foodError.classList.remove('is-active')), 2500); 
+    return false;
+    };
 
     // create new card object
     card = new Card({lat,lng}, vendor, food, seating);
@@ -135,6 +137,8 @@ class App {
     tabContentList.classList.add('is-active');
     tabForm.classList.add('tab-disabled');
     document.getElementById('form').reset();
+    vendorError.classList.remove('is-active');
+    foodError.classList.remove('is-active');
   }
 
   _renderMarker(card) {
