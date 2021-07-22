@@ -17,9 +17,9 @@ class Card {
     // prettier-ignore
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    this.description = `A ${this.vendor[0]}${this.vendor.slice(1)} was spotted on ${
+    this.description = `A food ${this.vendor[0]}${this.vendor.slice(1)} was spotted serving ${this.foodSelected} on ${
       months[this.date.getMonth()]
-    } ${this.date.getDate()} serving `;
+    } ${this.date.getDate()}.`;
   }
 
 };
@@ -179,7 +179,7 @@ class App {
     const markerType = card.vendor;
     const foodType = card.foodSelected;
 
-    if (markerType === "food truck") {
+    if (markerType === "truck") {
       L.marker(card.coords, {
         icon: blueMarker,
         draggable: true
@@ -187,13 +187,13 @@ class App {
         .addTo(this.#map)
         .bindTooltip(
           L.tooltip({
-            className: 'truck-tooltip'
+            className: `${card.vendor}-tooltip`
           })
         )
         .setTooltipContent(foodType);
     };
 
-    if (markerType === "food cart") {
+    if (markerType === "cart") {
       L.marker(card.coords, {
         icon: greenMarker,
         draggable: true,
@@ -201,13 +201,13 @@ class App {
         .addTo(this.#map)
         .bindTooltip(
           L.tooltip({
-            className: 'cart-tooltip'
+            className: `${card.vendor}-tooltip`
           })
         )
         .setTooltipContent(foodType);
     };
 
-    if (markerType === "food stand") {
+    if (markerType === "stand") {
       L.marker(card.coords, {
         icon: redMarker,
         draggable: true,
@@ -215,7 +215,7 @@ class App {
         .addTo(this.#map)
         .bindTooltip(
           L.tooltip({
-            className: 'stand-tooltip'
+            className: `${card.vendor}-tooltip`
           })
         )
         .setTooltipContent(foodType);
@@ -224,10 +224,10 @@ class App {
 
   _renderCard(card) {
     let html = `
-      <li class="card card-wide card-bar-red card--${card.type}" data-id="${card.id}">
+      <li class="card card-wide card--${card.vendor}" data-id="${card.id}">
         <p class="card-content">
           <span class="food__icon">${card.foodIcon}</span>
-          ${card.description}${card.foodSelected}
+          <span class="card__description">${card.description}</span>
         </p> 
       </li>  
     `;

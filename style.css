@@ -3,9 +3,9 @@
   --color-brand--2: #5a9359;
   --color-brand--3: #de2900;
   --color-brand--4: #e8912e;
-  --color-brand--5: #005E95;
-  --color-brand--6: #338033;
-  --color-brand--7: #e4a793;
+  --color-brand--5: #56a5d8;
+  --color-brand--6: #7aa87a;
+  --color-brand--7: #E45332;
 }
 
 /* GENERAL */
@@ -37,7 +37,7 @@
 
 
 
-.form__row {
+/* .form__row {
   display: flex;
   align-items: center;
 }
@@ -61,7 +61,7 @@
   border-radius: 3px;
   background-color: var(--color-light--3);
   transition: all 0.2s;
-}
+} */
 
 
 
@@ -74,6 +74,11 @@
 .card-form {
   margin-right: 1rem;
   box-shadow: none; 
+  transition: all 0.2s;
+}
+
+.tab-content-list .card-content {
+  padding: 0.5rem 1rem 0rem 1rem;
 }
 
 .checkbox {
@@ -164,16 +169,19 @@
 	border-right-color: #fff;
 	}
 
+.card--truck,
 .truck-tooltip {
-  border-left: 3px solid var(--color-brand--1);
+  border-left: 3px solid var(--color-brand--5);
 }
 
+.card--cart,
 .cart-tooltip {
-  border-left: 3px solid var(--color-brand--2);
+  border-left: 3px solid var(--color-brand--6);
 }
 
+.card--stand,
 .stand-tooltip {
-  border-left: 3px solid var(--color-brand--3);
+  border-left: 3px solid var(--color-brand--7);
 }
 
 .food__icon { 
