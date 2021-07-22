@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="shortcut icon" type="image/png" href="/icon.png" />
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
@@ -14,7 +12,6 @@
   <link rel="stylesheet"
     href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
   <link rel="stylesheet" href="style.css" />
-
   <title>Local Storage Example</title>
 </head>
 <body>
@@ -23,7 +20,6 @@
     <div id="side-panel">
       <div class="panel panel-white panel-no-border">
         <h3> <span class="logo">🌶️ </span>Street Food Tracker</h3>
-
         <div class="modifier-class trailer-2 js-tab-group tabs-transparent">
           <nav class="tab-nav">
             <a class="tab-title js-tab tab-info">About</a>
@@ -31,17 +27,13 @@
             <a class="tab-title is-active js-tab tab-list">List</a>
           </nav>
           <section class="tab-contents">
-
             <article class="tab-section js-tab-section tab-content-info animate-fade-in">
               <p>About this project...</p>
             </article>
-
             <article class="tab-section js-tab-section tab-content-form animate-fade-in">
-
               <div class="card form card-form">
                 <div class="card-content streetFood">
-                  <form id="form">
-              
+                  <form id="form">             
                     <label>
                       <div for="vendor" class="vendor-type">Vendor Type:</div>
                       <select name="vendor" id="vendor" class="select-full form__vendor--type" required>
@@ -54,58 +46,51 @@
                         A vendor type is required
                       </div>
                     </label>
-
                     <label>
                       <div for="food" class="food-type">Food Type:</div>
                       <select name="food" id="food" class="select-full form__food--type" required>
                         <option value="" selected>select</option>
-                        <option value="American Cuisine" alt="🍔">American Cuisine</option>
-                        <option value="Bakery" alt="🥖">Bakery</option>
-                        <option value="Breakfast" alt="🥐">Breakfast</option>
-                        <option value="Chinese Cuisine" alt="🥡">Chinese Cuisine</option>
-                        <option value="Coffee/Beverages" alt="🥤">Coffee/Beverages</option>
-                        <option value="Ice Cream/Desserts" alt="🍦">Ice Cream/Desserts</option>
-                        <option value="Filipino Cuisine" alt="🦐">Filipino Cuisine</option>
-                        <option value="Fusion Cuisine" alt="🥘">Fusion Cuisine</option>
-                        <option value="Indian Cuisine" alt="🍛">Indian Cuisine</option>
-                        <option value="Italian Cuisine" alt="🍕">Italian Cuisine</option>
-                        <option value="Japanese Cuisine" alt="🍣">Japanese Cuisine</option>
-                        <option value="Korean Cuisine" alt="🍲">Korean Cuisine</option>
-                        <option value="Mexican Cuisine" alt="🌮">Mexican Cuisine</option>
-                        <option value="Middle Eastern Cuisine" alt="🥙">Middle Eastern Cuisine</option>
-                        <option value="Other" alt="❓">Other</option>
-                        <option value="Thai Cuisine" alt="🥥">Thai Cuisine</option>
-                        <option value="Vegetarian/Vegan Cuisine" alt="🥗">Vegetarian/Vegan Cuisine</option>
-                        <option value="Vietnamese Cuisine" alt="🍜">Vietnamese Cuisine</option>
+                        <option value="🍔 " >American Cuisine</option>
+                        <option value="🥐 " >Baked Goods</option>
+                        <option value="🍳 " >Breakfast</option>
+                        <option value="🥡 " >Chinese Cuisine</option>
+                        <option value="🥤 " >Coffee/Beverages</option>
+                        <option value="🍦 " >Ice Cream/Desserts</option>
+                        <option value="🦐 " >Filipino Cuisine</option>
+                        <option value="🥘 " >Fusion Cuisine</option>
+                        <option value="🍛 " >Indian Cuisine</option>
+                        <option value="🍕 " >Italian Cuisine</option>
+                        <option value="🍣 " >Japanese Cuisine</option>
+                        <option value="🍲 " >Korean Cuisine</option>
+                        <option value="🌮 " >Mexican Cuisine</option>
+                        <option value="🥙 " >Middle Eastern Cuisine</option>
+                        <option value="❓ " >Other</option>
+                        <option value="🥥 " >Thai Cuisine</option>
+                        <option value="🥗 " >Vegetarian/Vegan Cuisine</option>
+                        <option value="🍜 " >Vietnamese Cuisine</option>
                       </select>
                       <div class="input-error-message food-error animate-fade-in">
                         A food type is required
                       </div>
                     </label>
-
                     <fieldset class="fieldset-checkbox">
                       <label>
                         <input class="checkbox" type="checkbox" name="seating" value="seating">Outdoor Seating
                       </label>
                     </fieldset>
-
                     <button type="" class="form__btn btn select-full " id="form__btn">Map Location</button>
-
                   </form>
                 </div>
               </div>
             </article>
 
             <article class="tab-section js-tab-section is-active tab-content-list animate-fade-in">
-              <p>Click on the map to add a new street food location list item... </p>
-
-              <div class="card card-wide card-bar-red">
+              <p class="tab-content-text">Click on the map to add a new street food location list item... </p>
+              <!-- <div class="card card-wide card-bar-red">
                 <div class="card-content">
-                  
                 </div>
-              </div>
+              </div> -->
             </article>
-
           </section>
         </div>
       </div>
@@ -123,7 +108,6 @@
       </div>
     </div>
   </div>
-
   <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
@@ -134,5 +118,4 @@
     calcite.init()
   </script>
 </body>
-
 </html>

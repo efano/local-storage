@@ -4,15 +4,25 @@ class Card {
   date = new Date();
   id = (Date.now() + '').slice(-10);
 
-  constructor(coords, vendor, food, seating) {
+  constructor(coords, vendor, foodIcon, seating, foodSelected) {
     this.coords = coords;
     this.vendor = vendor;
-    this.food = food;
+    this.foodIcon = foodIcon;
     this.seating = seating;
+    this.foodSelected = foodSelected;
+    this._setDescription();
   }
-}
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  _setDescription() {
+    // prettier-ignore
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    this.description = `A ${this.vendor[0]}${this.vendor.slice(1)} was spotted on ${
+      months[this.date.getMonth()]
+    } ${this.date.getDate()} serving `;
+  }
+
+};
 
 const tabInfo = document.querySelector('.tab-info');
 const tabContentInfo = document.querySelector('.tab-content-info');
@@ -20,11 +30,13 @@ const tabForm = document.querySelector('.tab-form');
 const tabContentForm = document.querySelector('.tab-content-form');
 const tabList = document.querySelector('.tab-list');
 const tabContentList = document.querySelector('.tab-content-list');
+const listText = document.querySelector('.tab-content-text');
 const form = document.querySelector('.form');
 const containerStreetFood = document.querySelector('.streetFood');
 const inputVendorType = document.querySelector('.form__vendor--type');
 const vendorError = document.querySelector('.vendor-error');
 const inputFoodType = document.querySelector('.form__food--type');
+const foodSelected = document.querySelector('.form__food--type option:checked');
 const foodError = document.querySelector('.food-error');
 const inputSeating = document.querySelector('.checkbox');
 const legend = document.querySelector('.legend');
@@ -102,10 +114,12 @@ class App {
     e.preventDefault();
 
     // get data from form
-    const vendor = inputVendorType.value;
-    const food = inputFoodType.value;
-    const seating = inputSeating.checked;
     const {lat,lng} = this.#mapEvent.latlng;
+    const vendor = inputVendorType.value;
+    const foodIcon = inputFoodType.value;
+    const seating = inputSeating.checked;
+    const selectedFood = (document.querySelector('.form__food--type option:checked').textContent);
+    //const foodSelected = document.querySelector('.form__food--type option:selected').textContent;
     let card;
 
     if (vendor === '') {
@@ -115,20 +129,20 @@ class App {
     return false;
     };
 
-    if (food === '') {
+    if (foodIcon === '') {
       foodError.classList.add('is-active');
-      //inputFoodType.focus();
+      inputFoodType.focus();
       setTimeout(() => (foodError.classList.remove('is-active')), 2500); 
     return false;
     };
 
     // create new card object
-    card = new Card({lat,lng}, vendor, food, seating);
+    card = new Card({lat,lng}, vendor, foodIcon, seating, selectedFood);
     this.#cards.push(card);
     console.log(card);
     
-    this._renderMarker(card);
-    //this._renderCard(card);
+    this._renderMapMarker(card);
+    this._renderCard(card);
 
     legend.classList.remove('legend-disabled');
     tabForm.classList.remove('is-active');
@@ -137,11 +151,9 @@ class App {
     tabContentList.classList.add('is-active');
     tabForm.classList.add('tab-disabled');
     document.getElementById('form').reset();
-    vendorError.classList.remove('is-active');
-    foodError.classList.remove('is-active');
   }
 
-  _renderMarker(card) {
+  _renderMapMarker(card) {
 
     const markerOptions = L.Icon.extend({
       options: {
@@ -165,7 +177,7 @@ class App {
     });
 
     const markerType = card.vendor;
-    const foodType = card.food;
+    const foodType = card.foodSelected;
 
     if (markerType === "food truck") {
       L.marker(card.coords, {
@@ -210,42 +222,42 @@ class App {
     };
   };
 
-  // _renderCard(card) {
-  //   let html = `
-  //     <li class="workout workout--${workout.type}" data-id="${workout.id}">
-  //       <h2 class="workout__title">${workout.description}</h2>
-  //       <div class="workout__details">
-  //         <span class="workout__icon">${
-  //           workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
-  //         }</span>
-  //         <span class="workout__value">${workout.distance}</span>
-  //         <span class="workout__unit">km</span>
-  //       </div>
-  //       <div class="workout__details">
-  //         <span class="workout__icon">⏱</span>
-  //         <span class="workout__value">${workout.duration}</span>
-  //         <span class="workout__unit">min</span>
-  //       </div>
-  //   `;
+  _renderCard(card) {
+    let html = `
+      <li class="card card-wide card-bar-red card--${card.type}" data-id="${card.id}">
+        <p class="card-content">
+          <span class="food__icon">${card.foodIcon}</span>
+          ${card.description}${card.foodSelected}
+        </p> 
+      </li>  
+    `;
+    // add seating...
 
-  //   <p class="font-size--1 trailer-half">🍕 A food truck serving American cuisine was spotted on July 9</p>
+    // if (card.type === 'running')
+    // html += `
+    //   <div class="workout__details">
+    //     <span class="workout__icon">⚡️</span>
+    //     <span class="workout__value">${workout.pace.toFixed(1)}</span>
+    //     <span class="workout__unit">min/km</span>
+    //   </div>
+    //   <div class="workout__details">
+    //     <span class="workout__icon">🦶🏼</span>
+    //     <span class="workout__value">${workout.cadence}</span>
+    //     <span class="workout__unit">spm</span>
+    //   </div>
+    // </li>
+    // `;
 
-  //   if (workout.type === 'cycling')
-  //     html += `
-  //       <div class="workout__details">
-  //         <span class="workout__icon">⚡️</span>
-  //         <span class="workout__value">${workout.speed.toFixed(1)}</span>
-  //         <span class="workout__unit">km/h</span>
-  //       </div>
-  //       <div class="workout__details">
-  //         <span class="workout__icon">⛰</span>
-  //         <span class="workout__value">${workout.elevationGain}</span>
-  //         <span class="workout__unit">m</span>
-  //       </div>
-  //     </li>
-  //     `;
+    
 
-  // }
-}
+    listText.insertAdjacentHTML('afterend', html);
+
+    // var d1 = document.getElementById('one');
+    // d1.insertAdjacentHTML('afterend', '<div id="two">two</div>');
+
+    // const tabContentList = document.querySelector('.tab-content-list');
+
+  }
+};
 
 const app = new App();
