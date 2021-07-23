@@ -19,9 +19,8 @@ class Card {
 
     this.description = `A food ${this.vendor[0]}${this.vendor.slice(1)} was spotted serving ${this.foodSelected} on ${
       months[this.date.getMonth()]
-    } ${this.date.getDate()}.`;
+    } ${this.date.getDate()}. ${this.seating === true ? 'Outdoor seating available.' : ''}`;
   }
-
 };
 
 const tabInfo = document.querySelector('.tab-info');
@@ -32,7 +31,6 @@ const tabList = document.querySelector('.tab-list');
 const tabContentList = document.querySelector('.tab-content-list');
 const listText = document.querySelector('.tab-content-text');
 const form = document.querySelector('.form');
-const containerStreetFood = document.querySelector('.streetFood');
 const inputVendorType = document.querySelector('.form__vendor--type');
 const vendorError = document.querySelector('.vendor-error');
 const inputFoodType = document.querySelector('.form__food--type');
@@ -119,7 +117,6 @@ class App {
     const foodIcon = inputFoodType.value;
     const seating = inputSeating.checked;
     const selectedFood = (document.querySelector('.form__food--type option:checked').textContent);
-    //const foodSelected = document.querySelector('.form__food--type option:selected').textContent;
     let card;
 
     if (vendor === '') {
@@ -231,32 +228,7 @@ class App {
         </p> 
       </li>  
     `;
-    // add seating...
-
-    // if (card.type === 'running')
-    // html += `
-    //   <div class="workout__details">
-    //     <span class="workout__icon">⚡️</span>
-    //     <span class="workout__value">${workout.pace.toFixed(1)}</span>
-    //     <span class="workout__unit">min/km</span>
-    //   </div>
-    //   <div class="workout__details">
-    //     <span class="workout__icon">🦶🏼</span>
-    //     <span class="workout__value">${workout.cadence}</span>
-    //     <span class="workout__unit">spm</span>
-    //   </div>
-    // </li>
-    // `;
-
-    
-
     listText.insertAdjacentHTML('afterend', html);
-
-    // var d1 = document.getElementById('one');
-    // d1.insertAdjacentHTML('afterend', '<div id="two">two</div>');
-
-    // const tabContentList = document.querySelector('.tab-content-list');
-
   }
 };
 
