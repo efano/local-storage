@@ -19,7 +19,7 @@ class Card {
 
     this.description = `A food ${this.vendor[0]}${this.vendor.slice(1)} was spotted serving ${this.foodSelected} on ${
       months[this.date.getMonth()]
-    } ${this.date.getDate()}. ${this.seating === true ? 'Outdoor seating available.' : ''}`;
+    } ${this.date.getDate()}. ${this.seating === true ? '✔️Seating available.' : ''}`;
   }
 };
 
