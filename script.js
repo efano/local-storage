@@ -19,7 +19,7 @@ class Card {
 
     this.description = `A food ${this.vendor[0]}${this.vendor.slice(1)} was spotted serving ${this.foodSelected} on ${
       months[this.date.getMonth()]
-    } ${this.date.getDate()}. ${this.seating === true ? '✔️Seating available.' : ''}`;
+    } ${this.date.getDate()}. ${this.seating === true ? 'Seating available.' : ''}`;
   }
 };
 
@@ -29,6 +29,7 @@ const tabForm = document.querySelector('.tab-form');
 const tabContentForm = document.querySelector('.tab-content-form');
 const tabList = document.querySelector('.tab-list');
 const tabContentList = document.querySelector('.tab-content-list');
+const containerCards = document.querySelector('.cards');
 const listText = document.querySelector('.tab-content-text');
 const form = document.querySelector('.form');
 const inputVendorType = document.querySelector('.form__vendor--type');
@@ -41,12 +42,14 @@ const legend = document.querySelector('.legend');
 
 class App {
   #map;
+  #mapZoomLevel = 16;
   #mapEvent;
   #cards = [];
 
   constructor() {
     this._getPosition();
     document.getElementById('form__btn').addEventListener('click', this._newLocation.bind(this));
+    containerCards.addEventListener('click', this._moveToMarker.bind(this));
   }
 
   _getPosition() {
@@ -54,13 +57,13 @@ class App {
       navigator.geolocation.getCurrentPosition(
         this._loadMap.bind(this),
         function () {
-          alert('Could not get your position')
+          alert('The application could not get your position. This is required.')
         }
       );
   }
 
   _loadMap(position) {
-    const basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    const basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19
@@ -76,7 +79,7 @@ class App {
       center: coords,
       layers: basemap,
       zoomControl: false,
-      zoom: 16
+      zoom: this.#mapZoomLevel
     };
     
     this.#map = L.map('map', options).locate({
@@ -100,12 +103,12 @@ class App {
 
   _showForm(mapE) {
     this.#mapEvent = mapE;
-      tabForm.classList.remove('tab-disabled');
-      tabList.classList.remove('is-active');
-      tabForm.classList.add('is-active');
-      tabContentList.classList.remove('is-active');
-      tabContentForm.classList.add('is-active');
-      inputVendorType.focus();
+    tabForm.classList.remove('tab-disabled');
+    tabList.classList.remove('is-active');
+    tabForm.classList.add('is-active');
+    tabContentList.classList.remove('is-active');
+    tabContentForm.classList.add('is-active');
+    inputVendorType.focus();
   }
 
   _newLocation(e) {
@@ -164,15 +167,12 @@ class App {
     const redMarker = new markerOptions ({
       iconUrl: 'img/marker-red.svg',
     });
-
     const greenMarker = new markerOptions ({
       iconUrl: 'img/marker-green.svg',
     });
-
     const blueMarker = new markerOptions ({
       iconUrl: 'img/marker-blue.svg',
     });
-
     const markerType = card.vendor;
     const foodType = card.foodSelected;
 
@@ -221,7 +221,7 @@ class App {
 
   _renderCard(card) {
     let html = `
-      <li class="card card-wide card--${card.vendor}" data-id="${card.id}">
+      <li class="card card-wide card-list card--${card.vendor}" data-id="${card.id}">
         <p class="card-content">
           <span class="food__icon">${card.foodIcon}</span>
           <span class="card__description">${card.description}</span>
@@ -230,6 +230,30 @@ class App {
     `;
     listText.insertAdjacentHTML('afterend', html);
   }
+
+  _moveToMarker(e) {
+    if (!this.#map) return;
+
+    const cardEl = e.target.closest('.card');
+    //console.log('cardEl: ', cardEl);
+
+    if (!cardEl) return;
+
+    const card = this.#cards.find(
+      selectedC => selectedC.id === cardEl.dataset.id
+    );
+    //console.log(card);
+
+    this.#map.setView(card.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+
+  }
+
+
 };
 
 const app = new App();
