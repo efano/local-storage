@@ -170,14 +170,14 @@ class App {
     const greenMarker = new markerOptions ({
       iconUrl: 'img/marker-green.svg',
     });
-    let blueMarker = new markerOptions ({
+    const blueMarker = new markerOptions ({
       iconUrl: 'img/marker-blue.svg',
     });
     const markerType = card.vendor;
     const foodType = card.foodSelected;
 
     if (markerType === "truck") {
-       blueMarker = L.marker(card.coords, {
+       L.marker(card.coords, {
         icon: blueMarker,
       })
         .addTo(this.#map)
@@ -213,22 +213,14 @@ class App {
           })
         )
         .setTooltipContent(foodType)
-
-        // this.#map.setView(card.coords, 16, {
-        //   animate: true,
-        //   pan: {
-        //     duration: 1,
-        //   },
-        // });
     };
 
-    this.#map.setView(card.coords, 16, {
+    this.#map.setView(card.coords, this.#mapZoomLevel, {
       animate: true,
       pan: {
         duration: 1,
       },
     });
-
   };
 
   _renderCard(card) {
@@ -262,7 +254,6 @@ class App {
         duration: 1,
       },
     });
-
   }
 
 
