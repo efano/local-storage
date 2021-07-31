@@ -63,7 +63,7 @@ class App {
   }
 
   _loadMap(position) {
-    const basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
+    const basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19
@@ -160,9 +160,9 @@ class App {
         iconSize: [40, 40],
         iconAnchor: [20, 38],
         tooltipAnchor:  [15, -25],
-        className: 'markers'
+       className: 'markers'
       }
-  });
+    });
 
     const redMarker = new markerOptions ({
       iconUrl: 'img/marker-red.svg',
@@ -170,16 +170,15 @@ class App {
     const greenMarker = new markerOptions ({
       iconUrl: 'img/marker-green.svg',
     });
-    const blueMarker = new markerOptions ({
+    let blueMarker = new markerOptions ({
       iconUrl: 'img/marker-blue.svg',
     });
     const markerType = card.vendor;
     const foodType = card.foodSelected;
 
     if (markerType === "truck") {
-      L.marker(card.coords, {
+       blueMarker = L.marker(card.coords, {
         icon: blueMarker,
-        draggable: true
       })
         .addTo(this.#map)
         .bindTooltip(
@@ -187,13 +186,12 @@ class App {
             className: `${card.vendor}-tooltip`
           })
         )
-        .setTooltipContent(foodType);
+        .setTooltipContent(foodType)
     };
 
     if (markerType === "cart") {
       L.marker(card.coords, {
         icon: greenMarker,
-        draggable: true,
       })
         .addTo(this.#map)
         .bindTooltip(
@@ -207,7 +205,6 @@ class App {
     if (markerType === "stand") {
       L.marker(card.coords, {
         icon: redMarker,
-        draggable: true,
       })
         .addTo(this.#map)
         .bindTooltip(
@@ -215,8 +212,23 @@ class App {
             className: `${card.vendor}-tooltip`
           })
         )
-        .setTooltipContent(foodType);
+        .setTooltipContent(foodType)
+
+        // this.#map.setView(card.coords, 16, {
+        //   animate: true,
+        //   pan: {
+        //     duration: 1,
+        //   },
+        // });
     };
+
+    this.#map.setView(card.coords, 16, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+
   };
 
   _renderCard(card) {
@@ -240,7 +252,7 @@ class App {
     if (!cardEl) return;
 
     const card = this.#cards.find(
-      selectedC => selectedC.id === cardEl.dataset.id
+      selectedCard => selectedCard.id === cardEl.dataset.id
     );
     //console.log(card);
 
