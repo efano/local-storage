@@ -17,9 +17,10 @@ class Card {
     // prettier-ignore
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    this.description = `A food ${this.vendor[0]}${this.vendor.slice(1)} was spotted serving ${this.foodSelected} on ${
-      months[this.date.getMonth()]
-    } ${this.date.getDate()}. ${this.seating === true ? 'Seating available.' : ''}`;
+    this.description = `A food ${this.vendor[0]}${this.vendor.slice(1)} was spotted serving ` + 
+    "<span class='food'>" +
+    `${this.foodSelected}` + "</span>" +
+    ` on ${months[this.date.getMonth()]} ${this.date.getDate()}. ${this.seating === true ? 'Seating available.' : ''}`;
   }
 };
 
@@ -47,7 +48,13 @@ class App {
   #cards = [];
 
   constructor() {
+    // get user position
     this._getPosition();
+
+    // get data from local storage
+    this._getLocalStorage();
+
+    // attach event handlers
     document.getElementById('form__btn').addEventListener('click', this._newLocation.bind(this));
     containerCards.addEventListener('click', this._moveToMarker.bind(this));
   }
@@ -99,6 +106,11 @@ class App {
     }).addTo(this.#map)
 
     this.#map.on('click', this._showForm.bind(this));
+
+    this.#cards.forEach(cardLS => {
+      this._renderMapMarker(cardLS);
+      legend.classList.remove('legend-disabled');
+    });
   }
 
   _showForm(mapE) {
@@ -144,6 +156,9 @@ class App {
     this._renderMapMarker(card);
     this._renderCard(card);
 
+    // set local storage
+    this._setLocalStorage();
+
     legend.classList.remove('legend-disabled');
     tabForm.classList.remove('is-active');
     tabContentForm.classList.remove('is-active');
@@ -154,7 +169,6 @@ class App {
   }
 
   _renderMapMarker(card) {
-
     const markerOptions = L.Icon.extend({
       options: {
         iconSize: [40, 40],
@@ -239,14 +253,12 @@ class App {
     if (!this.#map) return;
 
     const cardEl = e.target.closest('.card');
-    //console.log('cardEl: ', cardEl);
 
     if (!cardEl) return;
 
     const card = this.#cards.find(
       selectedCard => selectedCard.id === cardEl.dataset.id
     );
-    //console.log(card);
 
     this.#map.setView(card.coords, this.#mapZoomLevel, {
       animate: true,
@@ -256,6 +268,26 @@ class App {
     });
   }
 
+  _setLocalStorage() {
+    localStorage.setItem('cards', JSON.stringify(this.#cards));
+  }
+
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('cards'));
+  
+    if (!data) return;
+
+    this.#cards = data;
+
+    this.#cards.forEach(cardLS => {
+      this._renderCard(cardLS);
+    });
+  }
+
+  reset() {
+    localStorage.removeItem('cards');
+    location.reload();
+  }
 
 };
 

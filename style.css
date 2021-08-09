@@ -49,6 +49,10 @@
   font-size: 28px !important;
 }
 
+.food {
+  font-weight: bold;
+}
+
 .tab-content-list .card-content {
   padding: 0.5rem 1rem 0rem 1rem;
 }
