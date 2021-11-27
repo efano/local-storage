@@ -187,6 +187,7 @@ class App {
     const blueMarker = new markerOptions ({
       iconUrl: 'img/marker-blue.svg',
     });
+
     const markerType = card.vendor;
     const foodType = card.foodSelected;
 
@@ -200,7 +201,7 @@ class App {
             className: `${card.vendor}-tooltip`
           })
         )
-        .setTooltipContent(foodType)
+        .setTooltipContent(foodType) 
     };
 
     if (markerType === "cart") {
