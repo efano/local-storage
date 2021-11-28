@@ -115,6 +115,8 @@ class App {
 
   _showForm(mapE) {
     this.#mapEvent = mapE;
+    tabInfo.classList.remove('is-active');
+    tabContentInfo.classList.remove('is-active');
     tabForm.classList.remove('tab-disabled');
     tabList.classList.remove('is-active');
     tabForm.classList.add('is-active');
