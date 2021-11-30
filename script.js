@@ -257,7 +257,7 @@ class App {
   _renderCard(card) {
     let html = `
       <li class="card card-wide card-list card--${card.vendor}" data-id="${card.id}">
-      <a href="#" class="icon-ui-close icon-ui-gray card-close" tabindex="0" role="button"></a>
+      <a href="#" class="icon-ui-close card-close" tabindex="0" role="button"></a>
         <p class="card-content">
           <span class="food__icon">${card.foodIcon}</span>
           <span class="card__description">${card.description}</span>
