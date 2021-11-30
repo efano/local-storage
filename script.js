@@ -268,11 +268,12 @@ class App {
   }
 
   _moveToMarker(e) {
-
     if (!this.#map) return;
 
     const cardEl = e.target.closest('.card');
+    const cardClose = e.target.closest('.card-close');
 
+    if (cardClose) return e.preventDefault();
     if (!cardEl) return;
 
     const card = this.#cards.find(
@@ -292,7 +293,7 @@ class App {
 
     const cardElement = e.target.closest('.card');
     const cardCloseIcon = e.target.closest('.card-close');
-
+    
     if (!cardElement) return;
     if (!cardCloseIcon) return;
 
