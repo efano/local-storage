@@ -23,6 +23,8 @@ class Card {
     ` on ${months[this.date.getMonth()]} ${this.date.getDate()}. ${this.seating === true ? 'Seating available.' : ''}`;
   }
 };
+
+const loader = document.querySelector('.loader');
 const closeIcon = document.querySelector('.close-card-icon');
 const tabInfo = document.querySelector('.tab-info');
 const tabContentInfo = document.querySelector('.tab-content-info');
@@ -90,7 +92,8 @@ class App {
       zoomControl: false,
       zoom: this.#mapZoomLevel
     };
-    
+
+    loader.classList.remove('is-active');
     
     this.#map = L.map('map', options).locate({
       watch: true

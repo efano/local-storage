@@ -74,6 +74,13 @@
   flex-grow: 1;
 }
 
+.loader {
+  position: absolute;
+  top: 40%;
+  left: 0%;
+  width: 100%;
+}
+
 .leaflet-container {
 	font: 12px/1.5 Nunito, sans-serif;
 	}
