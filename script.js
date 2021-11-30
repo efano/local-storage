@@ -111,7 +111,7 @@ class App {
 
     this.#map.on('click', this._showForm.bind(this));
 
-    this.#cards.forEach(cardLS => {
+    this.#cards.forEach((cardLS) => {
       this._renderMapMarker(cardLS);
       legend.classList.remove('legend-disabled');
     });
@@ -161,7 +161,6 @@ class App {
     this._renderMapMarker(card);
     this._renderCard(card);
 
-    // set local storage
     this._setLocalStorage();
 
     legend.classList.remove('legend-disabled');
@@ -294,15 +293,21 @@ class App {
     if (!cardElement) return;
     if (!cardCloseIcon) return;
 
-    const cardSelect = this.#cards.find(
-      selectedCard => selectedCard.id === cardElement.dataset.id
-    );
+    this.#cards.find(selectedCard => 
+      selectedCard.id === cardElement.dataset.id);
+
+    const index = this.#cards.findIndex(selectedCard => 
+      selectedCard.id === cardElement.dataset.id);
+
+    this.#cards.splice(index, 1);
 
     const selectMarker = document.getElementsByClassName('leaflet-pane leaflet-marker-pane' && cardElement.dataset.id).item(0);
     //console.log("selectMarker: ", selectMarker);
 
     selectMarker.remove();
-    cardElement.remove() 
+    cardElement.remove();
+    
+    this._setLocalStorage()
   }
 
   _setLocalStorage() {
@@ -316,7 +321,7 @@ class App {
 
     this.#cards = data;
 
-    this.#cards.forEach(cardLS => {
+    const localStorageItem = this.#cards.forEach(cardLS => {
       this._renderCard(cardLS);
     });
   }
