@@ -23,7 +23,7 @@ class Card {
     ` on ${months[this.date.getMonth()]} ${this.date.getDate()}. ${this.seating === true ? 'Seating available.' : ''}`;
   }
 };
-
+const closeIcon = document.querySelector('.close-card-icon');
 const tabInfo = document.querySelector('.tab-info');
 const tabContentInfo = document.querySelector('.tab-content-info');
 const tabForm = document.querySelector('.tab-form');
@@ -46,6 +46,7 @@ class App {
   #mapZoomLevel = 16;
   #mapEvent;
   #cards = [];
+  #markers = [];
 
   constructor() {
     // get user position
@@ -57,6 +58,7 @@ class App {
     // attach event handlers
     document.getElementById('form__btn').addEventListener('click', this._newLocation.bind(this));
     containerCards.addEventListener('click', this._moveToMarker.bind(this));
+    closeIcon.addEventListener('click', this._removeItem.bind(this));
   }
 
   _getPosition() {
@@ -89,12 +91,14 @@ class App {
       zoom: this.#mapZoomLevel
     };
     
+    
     this.#map = L.map('map', options).locate({
       watch: true
     });
 
     new L.Control.Zoom({ position: 'topright' }).addTo(this.#map);
 
+    // geolocation marker
     L.circleMarker(coords, {
       interactive: false,
       className: 'pulse',
@@ -153,7 +157,6 @@ class App {
     // create new card object
     card = new Card({lat,lng}, vendor, foodIcon, seating, selectedFood);
     this.#cards.push(card);
-    console.log(card);
     
     this._renderMapMarker(card);
     this._renderCard(card);
@@ -171,6 +174,9 @@ class App {
   }
 
   _renderMapMarker(card) {
+
+    let markerGroup =  L.layerGroup([]);
+
     const markerOptions = L.Icon.extend({
       options: {
         iconSize: [40, 40],
@@ -182,12 +188,15 @@ class App {
 
     const redMarker = new markerOptions ({
       iconUrl: 'img/marker-red.svg',
+      className: `${card.id}`
     });
     const greenMarker = new markerOptions ({
       iconUrl: 'img/marker-green.svg',
+      className: `${card.id}`
     });
     const blueMarker = new markerOptions ({
       iconUrl: 'img/marker-blue.svg',
+      className: `${card.id}`
     });
 
     const markerType = card.vendor;
@@ -197,7 +206,7 @@ class App {
        L.marker(card.coords, {
         icon: blueMarker,
       })
-        .addTo(this.#map)
+        .addTo(markerGroup)
         .bindTooltip(
           L.tooltip({
             className: `${card.vendor}-tooltip`
@@ -210,7 +219,7 @@ class App {
       L.marker(card.coords, {
         icon: greenMarker,
       })
-        .addTo(this.#map)
+        .addTo(markerGroup)
         .bindTooltip(
           L.tooltip({
             className: `${card.vendor}-tooltip`
@@ -223,7 +232,7 @@ class App {
       L.marker(card.coords, {
         icon: redMarker,
       })
-        .addTo(this.#map)
+        .addTo(markerGroup)
         .bindTooltip(
           L.tooltip({
             className: `${card.vendor}-tooltip`
@@ -231,6 +240,9 @@ class App {
         )
         .setTooltipContent(foodType)
     };
+
+    markerGroup.addTo(this.#map);
+    this.#markers.push(markerGroup);
 
     this.#map.setView(card.coords, this.#mapZoomLevel, {
       animate: true,
@@ -243,6 +255,7 @@ class App {
   _renderCard(card) {
     let html = `
       <li class="card card-wide card-list card--${card.vendor}" data-id="${card.id}">
+      <a href="#" class="icon-ui-close icon-ui-gray card-close" tabindex="0" role="button"></a>
         <p class="card-content">
           <span class="food__icon">${card.foodIcon}</span>
           <span class="card__description">${card.description}</span>
@@ -253,6 +266,7 @@ class App {
   }
 
   _moveToMarker(e) {
+
     if (!this.#map) return;
 
     const cardEl = e.target.closest('.card');
@@ -269,6 +283,26 @@ class App {
         duration: 1,
       },
     });
+  }
+
+  _removeItem(e) {
+    if (!this.#map) return;
+
+    const cardElement = e.target.closest('.card');
+    const cardCloseIcon = e.target.closest('.card-close');
+
+    if (!cardElement) return;
+    if (!cardCloseIcon) return;
+
+    const cardSelect = this.#cards.find(
+      selectedCard => selectedCard.id === cardElement.dataset.id
+    );
+
+    const selectMarker = document.getElementsByClassName('leaflet-pane leaflet-marker-pane' && cardElement.dataset.id).item(0);
+    //console.log("selectMarker: ", selectMarker);
+
+    selectMarker.remove();
+    cardElement.remove() 
   }
 
   _setLocalStorage() {
