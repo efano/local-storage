@@ -165,6 +165,13 @@
   drop-shadow(2px 1px 1px #ccc);
 }
 
+.cart:hover,
+.stand:hover,
+.truck:hover {
+  filter: 
+  drop-shadow(2px 1px 2px #959595);
+}
+
 .markers-legend{
   filter: 
   drop-shadow(1px 1px 1px #ccc);

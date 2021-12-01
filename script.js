@@ -184,20 +184,21 @@ class App {
         iconSize: [40, 40],
         iconAnchor: [20, 38],
         tooltipAnchor:  [15, -25],
+       className: 'markers'
       }
     });
 
     const redMarker = new markerOptions ({
       iconUrl: 'img/marker-red.svg',
-      className: 'stand'
+      className: `${card.id} stand`
     });
     const greenMarker = new markerOptions ({
       iconUrl: 'img/marker-green.svg',
-      className: 'cart'
+      className: `${card.id} cart`
     });
     const blueMarker = new markerOptions ({
       iconUrl: 'img/marker-blue.svg',
-      className: 'truck'
+      className: `${card.id} truck`
     });
 
     const markerType = card.vendor;
@@ -210,7 +211,6 @@ class App {
         .addTo(markerGroup)
         .bindTooltip(
           L.tooltip({
-            interactive: true,
             className: `${card.vendor}-tooltip`
           })
         )
@@ -224,7 +224,6 @@ class App {
         .addTo(markerGroup)
         .bindTooltip(
           L.tooltip({
-            interactive: true,
             className: `${card.vendor}-tooltip`
           })
         )
@@ -238,7 +237,6 @@ class App {
         .addTo(markerGroup)
         .bindTooltip(
           L.tooltip({
-            interactive: true,
             className: `${card.vendor}-tooltip`
           })
         )
@@ -282,16 +280,12 @@ class App {
       selectedCard => selectedCard.id === cardEl.dataset.id
     );
 
-    // const getMarker = document.getElementsByClassName('leaflet-pane leaflet-marker-pane' && cardEl.dataset.id).item(0);
-    // console.log(getMarker);
-
     this.#map.setView(card.coords, this.#mapZoomLevel, {
       animate: true,
       pan: {
         duration: 1,
       },
     });
-
   }
 
   _removeItem(e) {
@@ -312,6 +306,7 @@ class App {
     this.#cards.splice(index, 1);
 
     const selectMarker = document.getElementsByClassName('leaflet-pane leaflet-marker-pane' && cardElement.dataset.id).item(0);
+    //console.log("selectMarker: ", selectMarker);
 
     selectMarker.remove();
     cardElement.remove();
