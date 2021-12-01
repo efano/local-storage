@@ -280,6 +280,10 @@ class App {
       selectedCard => selectedCard.id === cardEl.dataset.id
     );
 
+    // const selectMarker = document.getElementsByClassName('leaflet-pane leaflet-marker-pane' && cardEl.dataset.id).item(0);
+    // selectMarker.classList.add('marker-hover');
+    // console.log("selectMarker: ", selectMarker);
+
     this.#map.setView(card.coords, this.#mapZoomLevel, {
       animate: true,
       pan: {
@@ -306,7 +310,6 @@ class App {
     this.#cards.splice(index, 1);
 
     const selectMarker = document.getElementsByClassName('leaflet-pane leaflet-marker-pane' && cardElement.dataset.id).item(0);
-    //console.log("selectMarker: ", selectMarker);
 
     selectMarker.remove();
     cardElement.remove();
